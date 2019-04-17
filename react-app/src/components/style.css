@@ -1,0 +1,56 @@
+
+.item .item__button{
+
+    display:none;
+}
+
+.item:hover .item__button{
+
+    display:inline-block;
+}
+.item{
+    font-size:20px;
+}
+
+.item__button{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size:17px;
+    color:red;
+}
+#clear__button__hidden{
+    position: absolute;
+    top:60.5%;
+    left:7.5%;
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: none;
+    cursor: pointer;
+}
+#clear__button{
+    position: absolute;
+    top:60.5%;
+    left:7.5%;
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.basket__item__crossed{
+    text-decoration: line-through;
+}
+.basket__item__not__crossed{
+    text-decoration: none;
+}
