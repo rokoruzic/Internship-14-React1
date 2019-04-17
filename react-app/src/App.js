@@ -10,7 +10,7 @@ class App extends Component {
       index: [""],
       removeAllGroceries: false,
       groceryIndexes: [],
-      textDecoration: "none",
+      buttonDisplay:"",
       groceryToStrike: -1
 
     };
@@ -18,7 +18,6 @@ class App extends Component {
   }
   handleRemoveGrocery = (event) => {
     var groceryToRemove = event.target.dataset.value;
-    console.log(groceryToRemove);
     var listOfGroceries = this.state.index;
     listOfGroceries.forEach(function (item, i) {
       if (parseInt(item.replace(/[^0-9\.]+/g, "").trim(), 10) === 1 && item.replace(/[0-9]/g, '').trim() == groceryToRemove.replace(/[0-9]/g, '').trim())
@@ -41,10 +40,23 @@ class App extends Component {
     });
   }
   handleGroceryClick = (event) => {
-    console.log(event.target.style)
+    function strikeThrough(text) {
+      return text.split('').map(char => char + '\u0336').join('')
+    }
+    var groceryToStrike = strikeThrough(event.target.dataset.value);
+    var listToEdit = this.state.index;
+    listToEdit.forEach(function (item, i) {
+      if (item === event.target.dataset.value)
+        listToEdit[i] = groceryToStrike;
+    });
 
 
-    event.target.style.textDecoration = "line-through"
+    // event.target.style.textDecoration = "line-through"
+    this.setState({
+      index: listToEdit,
+      buttonDisplay:"none"
+
+    })
 
 
   }
@@ -102,9 +114,7 @@ class App extends Component {
   };
 
   render() {
-    var strikeClass = {
-      textDecoration: this.state.textDecoration
-    }
+    
 
     var namesList = GroceriesList.map((grocery, index) =>
       <div key={index} className="item" >
@@ -115,14 +125,13 @@ class App extends Component {
     );
 
     var basketList = this.state.index.map((grocery, index) =>
-      <div style={strikeClass} onClick={this.handleGroceryClick} key={index} data-value={grocery} className="item">
-        {grocery} <button className="item__button" onClick={this.handleRemoveGrocery} key={index} data-value={grocery}>-</button>
+      <div  onClick={this.handleGroceryClick} key={index} data-value={grocery} className="item">
+        {grocery}  <button className="item__button" onClick={this.handleRemoveGrocery} key={index} data-value={grocery}>-</button>
       </div>
 
     );
 
-    console.log(this.state.strike)
-    console.log(this.state.index)
+
     return (
       <>
         <div>
